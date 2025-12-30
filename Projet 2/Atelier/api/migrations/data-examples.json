@@ -1,0 +1,130 @@
+{
+	"lists": [
+		{
+			"title": "Backlog",
+			"position": 1
+		},
+		{
+			"title": "In Progress",
+			"position": 2
+		},
+		{
+			"title": "Done",
+			"position": 3
+		}
+	],
+	"cards": [
+		{
+			"content": "Créer le repo",
+			"position": 1,
+			"color": "#f2d7d5",
+			"list_id": 1
+		},
+		{
+			"content": "Rédiger le README",
+			"position": 2,
+			"color": "#f9e79f",
+			"list_id": 1
+		},
+		{
+			"content": "Configurer CI/CD",
+			"position": 3,
+			"color": "#d6eaf8",
+			"list_id": 1
+		},
+		{
+			"content": "Développer l'API",
+			"position": 1,
+			"color": "#d5f5e3",
+			"list_id": 2
+		},
+		{
+			"content": "Intégrer Sequelize",
+			"position": 2,
+			"color": "#fadbd8",
+			"list_id": 2
+		},
+		{
+			"content": "Écrire les tests unitaires",
+			"position": 3,
+			"color": "#e8daef",
+			"list_id": 2
+		},
+		{
+			"content": "Revue de la PR #12",
+			"position": 1,
+			"color": "#f5cba7",
+			"list_id": 3
+		},
+		{
+			"content": "Déployer sur staging",
+			"position": 2,
+			"color": "#d1f2eb",
+			"list_id": 3
+		}
+	],
+	"tags": [
+		{
+			"name": "feature",
+			"color": "#1f77b4"
+		},
+		{
+			"name": "bug",
+			"color": "#d62728"
+		},
+		{
+			"name": "urgent",
+			"color": "#ff7f0e"
+		},
+		{
+			"name": "docs",
+			"color": "#2ca02c"
+		},
+		{
+			"name": "test",
+			"color": "#9467bd"
+		}
+	],
+	"card_tag": [
+		{
+			"card_id": 1,
+			"tag_id": 1
+		},
+		{
+			"card_id": 1,
+			"tag_id": 4
+		},
+		{
+			"card_id": 2,
+			"tag_id": 4
+		},
+		{
+			"card_id": 3,
+			"tag_id": 3
+		},
+		{
+			"card_id": 4,
+			"tag_id": 1
+		},
+		{
+			"card_id": 4,
+			"tag_id": 3
+		},
+		{
+			"card_id": 5,
+			"tag_id": 1
+		},
+		{
+			"card_id": 6,
+			"tag_id": 5
+		},
+		{
+			"card_id": 7,
+			"tag_id": 2
+		},
+		{
+			"card_id": 8,
+			"tag_id": 1
+		}
+	]
+}
