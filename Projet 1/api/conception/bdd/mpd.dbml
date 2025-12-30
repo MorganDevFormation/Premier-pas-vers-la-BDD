@@ -1,0 +1,33 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table list {
+  id integer [primary key, increment]
+  title varchar [not null]
+  position integer 
+}
+
+Table card {
+  id integer [primary key, increment]
+  content varchar [not null]
+  position integer
+  color varchar
+  list_id integer [not null]
+}
+
+Table tag {
+  id integer [primary key, increment]
+  name varchar [not null]
+  color varchar
+}
+
+Table card_tag {
+  id integer [primary key, increment]
+  card_id integer [not null]
+  tag_id integer [not null]
+}
+
+Ref: card.list_id > list.id // One List to Many Card
+
+Ref: card_tag.card_id > card.id // Many Card To Many Tag
+Ref: card_tag.tag_id > tag.id // Many Tag to Many Card

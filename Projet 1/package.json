@@ -1,0 +1,30 @@
+{
+  "name": "okanban-sb06-morganleotet",
+  "version": "1.0.0",
+  "description": "Api fictive",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch api/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Florence/Okanban-SB06-MorganLeotet.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/O-clock-Florence/Okanban-SB06-MorganLeotet/issues"
+  },
+  "homepage": "https://github.com/O-clock-Florence/Okanban-SB06-MorganLeotet#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "joi": "^18.0.2",
+    "pg": "^8.16.3",
+    "sequelize": "^6.37.7"
+  }
+}
