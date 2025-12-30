@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T'chat - Posts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <h1>T'chat</h1>
+    <nav>
+      <a href="posts.html" class="active">Posts</a>
+      <a href="profile.html">Profil</a>
+      <button id="logout-btn">Déconnexion</button>
+    </nav>
+  </nav>
+
+  <div class="container">
+    <div class="glass-panel">
+      <h2>Posts</h2>
+      
+      <form id="post-form">
+        <h3>Nouveau post</h3>
+        <div class="form-group">
+          <label for="title">Titre</label>
+          <input type="text" id="title" name="title" required placeholder="Titre du post">
+        </div>
+        <div class="form-group">
+          <label for="content">Contenu</label>
+          <textarea id="content" name="content" required placeholder="Contenu du post"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="category">Catégorie</label>
+          <select id="category" required>
+            <option value="" disabled selected>Choisir une catégorie</option>
+          </select>
+        </div>
+        <button type="submit">Publier</button>
+      </form>
+
+      <section class="posts-list">
+        <h3>Posts récents</h3>
+        <div id="posts-list"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+  const API_BASE_URL = 'http://localhost:3000';
+  const token = localStorage.getItem('token');
+
+  async function getCategories() {
+    const res = await fetch(`${API_BASE_URL}/api/categories`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    return await res.json();
+  }
+
+  async function getPosts() {
+    const res = await fetch(`${API_BASE_URL}/api/posts`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await res.json();
+    return data.posts || [];
+  }
+
+  async function createPost(title, content, categoryId) {
+    const res = await fetch(`${API_BASE_URL}/api/posts`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ title, content, categoryId })
+    });
+    return await res.json();
+  }
+
+  async function renderCategories() {
+    const categories = await getCategories();
+    const select = document.getElementById('category');
+    select.innerHTML = '<option value="" disabled selected>Choisir une catégorie</option>';
+    categories.forEach(cat => {
+      const option = document.createElement('option');
+      option.value = cat.id;
+      option.textContent = cat.name;
+      select.appendChild(option);
+    });
+  }
+
+  async function renderPosts() {
+    const posts = await getPosts();
+    const container = document.getElementById('posts-list');
+    if (!Array.isArray(posts) || posts.length === 0) {
+      container.innerHTML = '<p class="no-posts">Aucune publication pour le moment</p>';
+      return;
+    }
+    container.innerHTML = posts.map(post => `
+      <div class="post">
+        <h3>${post.title}</h3>
+        <p>${post.content}</p>
+        <div class="post-meta">
+          <span>Par ${post.author?.username || 'Anonyme'}</span>
+          <span>${new Date(post.createdAt).toLocaleDateString()}</span>
+          <span>Catégorie : ${post.category?.name || 'Non renseignée'}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  document.getElementById('post-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').value;
+    const categoryId = document.getElementById('category').value;
+    await createPost(title, content, categoryId);
+    document.getElementById('title').value = '';
+    document.getElementById('content').value = '';
+    document.getElementById('category').value = '';
+    renderPosts();
+  });
+
+  renderCategories();
+  renderPosts();
+  </script>
+
+  <style>
+  select {
+    background: rgba(30, 30, 30, 0.8);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  select option {
+    background: #222;
+    color: #fff;
+  }
+  </style>
+</body>
+</html> 
